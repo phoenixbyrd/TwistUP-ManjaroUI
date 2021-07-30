@@ -79,8 +79,8 @@ update() {
     echo "This patch will be applied now: $patch"
   elif [[ "$runmode" == gui* ]];then
     while true;do
-      echo "$availablepatches" | yad --title='Twister OS Lite Patcher' --list --separator='\n' \
-        --text='The following Twister OS Lite patches are available:' \
+      echo "$availablepatches" | yad --title='Twister OS ManjaroUI Patcher' --list --separator='\n' \
+        --text='The following Twister OS ManjaroUI patches are available:' \
         --window-icon="${DIRECTORY}/icons/logo.png" \
         --column=Patch --no-headers --no-selection --borders=4 --text-align=left --buttons-layout=spread --width=372 \
         --button="$patch Details"!"${DIRECTORY}/icons/info.png"!"View the changelog of the $patch patch.":2 \
@@ -144,7 +144,7 @@ update() {
     "$DIRECTORY/terminal-run" "trap 'echo '\''Close this terminal to exit.'\'' ; sleep infinity' EXIT
       cd "\""$DIRECTORY"\""
       $script
-      yad --title='Twister OS Lite Patcher' \
+      yad --title='Twister OS ManjaroUI Patcher' \
       --text="\""$patch patch complete. Reboot now?"\"" \
       --window-icon="\""${DIRECTORY}/icons/logo.png"\"" \
       --button="\""Reboot!${DIRECTORY}/icons/power.png"\"":0 \
@@ -190,8 +190,8 @@ fi
 if [ ! -f ~/.config/autostart/twistup.desktop ];then
   echo "[Desktop Entry]
 Type=Application
-Name=TwistUP-Lite
-Comment=Twister OS Lite Patcher (TwistUP)
+Name=TwistUP-ManjaroUI
+Comment=Twister OS ManjaroUI Patcher (TwistUP)
 Exec=twistpatch gui-autostart
 OnlyShowIn=XFCE;
 StartupNotify=false
@@ -237,12 +237,12 @@ fi
 
 if [ ! -f "${DIRECTORY}/no-update-patcher" ];then
   localhash="$(git rev-parse HEAD)"
-  latesthash="$(git ls-remote https://github.com/phoenixbyrd/TwistUP-Lite HEAD | awk '{print $1}')"
+  latesthash="$(git ls-remote https://github.com/phoenixbyrd/TwistUP-ManjaroUI HEAD | awk '{print $1}')"
   if [ "$localhash" != "$latesthash" ] && [ ! -z "$latesthash" ] && [ ! -z "$localhash" ];then
-    echo "TwistUP-Lite is out of date. Downloading new version..."
+    echo "TwistUP-ManjaroUI is out of date. Downloading new version..."
     gio trash "$DIRECTORY"
     cd "$HOME"
-    git clone https://github.com/phoenixbyrd/TwistUP-Lite "$DIRECTORY"
+    git clone https://github.com/phoenixbyrd/TwistUP-ManjaroUI "$DIRECTORY"
     cd "$DIRECTORY"
   fi
 fi
@@ -250,7 +250,7 @@ fi
 if [[ "$runmode" == cli* ]] || [ "$runmode" == gui-update ];then
   if [ "$latestversion" == "$localversion" ];then
     #no update available
-    echo -e "\nYour version of Twister OS Lite is fully up to date already.\nExiting now."
+    echo -e "\nYour version of Twister OS ManjaroUI is fully up to date already.\nExiting now."
     exit 0
   elif [ "$latestversion" != "$localversion" ];then
     #update is available
@@ -265,7 +265,7 @@ elif [ "$runmode" == 'gui-autostart' ] && [ "$latestversion" != "$localversion" 
   fi
   
   if [ "$nextcheck" == 'never' ];then
-    echo "${DIRECTORY}/nextcheck prevents TwistUP-Lite from ever checking for updates. Goodbye!"
+    echo "${DIRECTORY}/nextcheck prevents TwistUP-ManjaroUI from ever checking for updates. Goodbye!"
     exit 0
   fi
   
@@ -283,7 +283,7 @@ elif [ "$runmode" == 'gui-autostart' ] && [ "$latestversion" != "$localversion" 
   screen_width="$(xdpyinfo | grep 'dimensions:' | tr 'x' '\n' | tr ' ' '\n' | sed -n 7p)"
   screen_height="$(xdpyinfo | grep 'dimensions:' | tr 'x' '\n' | tr ' ' '\n' | sed -n 8p)"
   
-  output="$(yad --form --text='Twister OS Lite can be updated.' \
+  output="$(yad --form --text='Twister OS ManjaroUI can be updated.' \
     --on-top --skip-taskbar --undecorated --close-on-unfocus \
     --geometry=260+$((screen_width-262))+$((screen_height-150)) \
     --field="Never show this again:CHK" --image="${DIRECTORY}/icons/logo.png" \
@@ -318,7 +318,7 @@ elif [ "$runmode" == 'gui' ];then
   bodytext="--field=Current version: $localversion
 Latest version: $latestversion:LBL"
   
-  yad --title='TwistUP-Lite' --form --separator='\n' --center \
+  yad --title='TwistUP-ManjaroUI' --form --separator='\n' --center \
     --window-icon="${DIRECTORY}/icons/logo.png" \
     --borders=4 --buttons-layout=spread --width=300 \
     "$bodytext" \
