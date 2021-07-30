@@ -5,12 +5,12 @@ AKA TwisterOS Patcher 2.0!
 
 ## To download to ~/TwistUP 
 ```
-git clone https://github.com/phoenixbyrd/TwistUP-Lite.git
+git clone https://github.com/phoenixbyrd/TwistUP-ManjaroUI.git
 ```
 ## To download to ~/patcher
 ```
 gio trash ~/patcher
-git clone https://github.com/phoenixbyrd/TwistUP-Lite.git patcher
+git clone https://github.com/phoenixbyrd/TwistUP-ManjaroUI.git patcher
 ```
 ## Enter directory:
 ```
